@@ -131,8 +131,8 @@ class Field:
                     and self.app.input_box_y.text != "" and self.app.input_box_dy.text != "" and self.app.input_box_dx.text != ""):
                     x = int(self.app.input_box_x.text)
                     y = int(self.app.input_box_y.text)
-                    dx = int(self.app.input_box_dx.text)
-                    dy = int(self.app.input_box_dy.text)
+                    dx = float(self.app.input_box_dx.text)
+                    dy = float(self.app.input_box_dy.text)
                     self.task((event.pos[0] - self.app.WIDTH + self.app.HEIGHT, event.pos[1]), (x, y), dx, dy)
 
     def task(self, pos_bg, pos_texture, dx, dy):
@@ -144,8 +144,8 @@ class Field:
         while len(q) != 0:
             x, y = q.pop()
             visited.add((x, y))
-            xt = (pos_texture[0] + dx*x) % self.texture.get_size()[0]
-            yt = (pos_texture[1] + dy*y) % self.texture.get_size()[1]
+            xt = int(pos_texture[0] + dx*x) % self.texture.get_size()[0]
+            yt = int(pos_texture[1] + dy*y) % self.texture.get_size()[1]
             self.surface.set_at((pos_bg[0]+x, pos_bg[1]+y), self.texture.get_at((xt, yt)))
             for i in (-1, 0, 1):
                 for j in (-1, 0, 1):
